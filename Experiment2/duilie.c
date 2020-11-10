@@ -13,10 +13,11 @@ int main(){
     }
 
     printf("output 5 datas:\n");
-    for ( int i = 0; i <N; i++)
+    for ( int j = N-1; j >=0; j--)
     {
-        printf("%d\n",a[i]);
+        printf("%d\n",a[j]);
     }
+    getchar();
 }
 
 // int Input(){
