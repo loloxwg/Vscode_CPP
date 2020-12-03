@@ -1,17 +1,22 @@
 #include <iostream>
-
-
 using namespace std;
-
-
 #define none 0        
 typedef int TelemType; // 节点数据域类型
-
 // 二叉链表存储 
 typedef struct Binode{
 	TelemType data;
 	struct Binode *left,*right;
 }Binode,* Bitree;
+
+int createBiTree(Bitree& T);
+int preOrder(Bitree T);
+int inOrder(Bitree T);
+int postOder(Bitree T);
+int Leafcount(Bitree T, int &num);
+int treeDeepth(Bitree &T,int &h);
+int Search_ChildNode_not_Empty(Bitree T, int &num);
+
+
 // 按先序输入建立二叉树 
 int createBiTree(Bitree& T){ 
 	TelemType ch;
@@ -81,6 +86,21 @@ int treeDeepth(Bitree &T,int &h){
 	return h;
 }
 
+int Search_ChildNode_not_Empty(Bitree T, int &numc)
+{
+	int left,right;
+	if(!T) numc=0;
+	else
+    {
+        if (T->left != NULL && T->right != NULL)
+        {
+            numc++;
+        }
+        Leafcount(T->left, numc);
+        Leafcount(T->right, numc);
+    }
+    return numc;
+}
 // int DeleteLeafcount(Bitree T, int &num)
 // {
 //     if (T)
@@ -98,17 +118,17 @@ int treeDeepth(Bitree &T,int &h){
 
 int main(){
 	//先序输入：
-    //  // 12##3##
+    //  // 12##3## no
     //
     //     25 30 6 22 71 
-    //    25 30 6 22 # # 71 # # 16 # # 26 2 4 36 # # # 5 # # 33 # 40 55 # # 44 # #
-    //    '25''30''6''22'##'71'##'16'##'26''24''36'###'5'##'33'#'40''55'##'44'##
-    //  25 30 6 22 0 0 71 0 0 10 0 0 26 2 4 36 0 0 0 5 0 0 33 0 40 55 0 0 44 0 0
-    //2530622##71##16##262436###5##33#4055##44##
-    //    1 2 0 0 3 0 0
+    //    25 30 6 22 # # 71 # # 16 # # 26 2 4 36 # # # 5 # # 33 # 40 55 # # 44 # #no
+    //    '25''30''6''22'##'71'##'16'##'26''24''36'###'5'##'33'#'40''55'##'44'## no
+    //25 30 6 22 0 0 71 0 0 10 0 0 26 2 4 36 0 0 0 5 0 0 33 0 40 55 0 0 44 0 0
+//1 2 0 0 3 0 0
 	Bitree T;
     int num =0;
 	int numh=0;
+	int numc=-2;
     cout<<"请输入序列";
 	createBiTree(T);
 	cout<<"先序遍历：";
@@ -119,10 +139,13 @@ int main(){
 	inOrder(T);
     // cout<<"\n叶子结点";
     Leafcount(T,num);
-    printf("此时叶子结点个数为：%d", num);
+    printf("\n此时叶子结点个数为：%d", num);
 
 	treeDeepth(T,numh);
-	cout<<"深度："<<numh;
+	cout<<"\n深度："<<numh;
+
+	Search_ChildNode_not_Empty(T,numc);
+	cout<<"\n左右孩子节点非空的节点数："<<numc;
 	cout<< endl; 
 
 	
