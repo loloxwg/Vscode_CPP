@@ -101,6 +101,22 @@ int Search_ChildNode_not_Empty(Bitree T, int &numc)
     }
     return numc;
 }
+
+int NumberOfTwoDegree(Bitree T)//求二叉树中度为2的节点个数 
+
+{
+    int i=0;
+    
+    if(NULL != T)
+    {
+            if((NULL!=T->left)&&(NULL!=T->right))
+              i=1+NumberOfTwoDegree(T->left)+NumberOfTwoDegree(T->right); 
+            else
+              i=NumberOfTwoDegree(T->left)+NumberOfTwoDegree(T->right); 
+    }
+    return i;
+}
+
 // int DeleteLeafcount(Bitree T, int &num)
 // {
 //     if (T)
@@ -118,14 +134,13 @@ int Search_ChildNode_not_Empty(Bitree T, int &numc)
 
 int main(){
 	//先序输入：
-    //  // 12##3## no
-    //
-    //     25 30 6 22 71 
-    //    25 30 6 22 # # 71 # # 16 # # 26 2 4 36 # # # 5 # # 33 # 40 55 # # 44 # #no
-    //    '25''30''6''22'##'71'##'16'##'26''24''36'###'5'##'33'#'40''55'##'44'## no
-    //25 30 6 22 0 0 71 0 0 10 0 0 26 2 4 36 0 0 0 5 0 0 33 0 40 55 0 0 44 0 0
-//1 2 0 0 3 0 0
+    //  	12##3## no 
+    //    	25 30 6 22 # # 71 # # 16 # # 26 2 4 36 # # # 5 # # 33 # 40 55 # # 44 # #no
+    //    	'25''30''6''22'##'71'##'16'##'26''24''36'###'5'##'33'#'40''55'##'44'## no
+    //		25 30 6 22 0 0 71 0 0 10 0 0 26 2 4 36 0 0 0 5 0 0 33 0 40 55 0 0 44 0 0
+	//		1 2 0 0 3 0 0
 	Bitree T;
+	int kkk;
     int num =0;
 	int numh=0;
 	int numc=-2;
@@ -146,6 +161,11 @@ int main(){
 
 	Search_ChildNode_not_Empty(T,numc);
 	cout<<"\n左右孩子节点非空的节点数："<<numc;
+
+
+	kkk=NumberOfTwoDegree(T);
+	cout<<"\n度为2的节点个数";
+	cout<<kkk;
 	cout<< endl; 
 
 	
