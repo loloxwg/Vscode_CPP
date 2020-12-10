@@ -12,7 +12,7 @@ BiTree CreatBiTree(BiTree r,int m)
     BiTree p,q,w;
         p = (BiTree)malloc(sizeof(BiTNode));
         p->rchild = NULL;
-         p->lchild = NULL;
+        p->lchild = NULL;
         p->data = m;
         q = r;
         while(q)
