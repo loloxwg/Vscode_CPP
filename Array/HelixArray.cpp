@@ -35,9 +35,8 @@ void PrintArray(int a[][N], int m, int n)
         for (j = 0; j < n; j++)
         {
             cout.width(2);
-            cout<<setiosflags(ios::right);
-            cout << a[i][j]<< " ";
-            
+            cout << setiosflags(ios::right);
+            cout << a[i][j] << " ";
         }
         cout << endl;
     }
@@ -72,11 +71,44 @@ void setHelixArray(int (*a)[N], int len, int n)
         }
     }
 }
+
+void set_Recursive_HelixArray(int a[][N], int len, int n, int m)
+{
+    int k, level;
+    level = n > 0 ? (n + 1) / 2 : -1;
+    if (m >= level)
+        return;
+    else
+    {
+        //top
+        for (k = m; k < n - m; k++)
+        {
+            a[m][k] = len++;
+        }
+        //right
+        for (k = m + 1; k < n - m - 1; k++)
+        {
+            a[k][n - m - 1] = len++;
+        }
+        //bottom
+        for (k = n - m - 1; k > m; k--)
+        {
+            a[n - m - 1][k] = len++;
+        }
+        //left
+        for (k = n - m - 1; k > m; k--)
+        {
+            a[k][m] = len++;
+        }
+        set_Recursive_HelixArray(a, len, n, m + 1);
+    }
+}
 int main()
 {
     int a[N][N];
     int b[N][N];
     int c[N][N];
+    int d[N][N];
     int m = 5;
     int n = 5;
     SetRowArray(a, m, n);
@@ -87,6 +119,9 @@ int main()
     cout << endl;
     setHelixArray(c, 1, n);
     PrintArray(c, n, n);
-
+    cout << endl;
+    set_Recursive_HelixArray(d, 1, n, 0);//m=0从第一圈开始跑
+    PrintArray(d, m, n);
+    cout << endl;
     return 0;
 }
