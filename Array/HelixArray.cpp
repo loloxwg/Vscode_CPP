@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
 #define N 5
 void SetRowArray(int a[][N], int m, int n)
@@ -33,7 +34,10 @@ void PrintArray(int a[][N], int m, int n)
     {
         for (j = 0; j < n; j++)
         {
-            cout << a[i][j] << " ";
+            cout.width(2);
+            cout<<setiosflags(ios::right);
+            cout << a[i][j]<< " ";
+            
         }
         cout << endl;
     }
