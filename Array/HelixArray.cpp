@@ -1,8 +1,9 @@
 #include <iostream>
 #include <iomanip>
+
 using namespace std;
 #define N 5
-void SetRowArray(int a[][N], int m, int n)
+void SetRowArray(int a[][N], int m, int n)//行排列
 {
     int i, j, len = 1;
     for (i = 0; i < m; i++)
@@ -15,7 +16,7 @@ void SetRowArray(int a[][N], int m, int n)
     }
 }
 
-void SetColumnArray(int (*a)[N], int m, int n)
+void SetColumnArray(int (*a)[N], int m, int n)//列排列
 {
     int i, j, len = 1;
     for (j = 0; j < n; j++)
@@ -27,7 +28,7 @@ void SetColumnArray(int (*a)[N], int m, int n)
         }
     }
 }
-void PrintArray(int a[][N], int m, int n)
+void PrintArray(int a[][N], int m, int n)//打印函数
 {
     int i, j;
     for (i = 0; i < m; i++)
@@ -41,7 +42,8 @@ void PrintArray(int a[][N], int m, int n)
         cout << endl;
     }
 }
-
+//控制走过的圈数 (n+1)/2
+//非递归螺旋方阵
 void setHelixArray(int (*a)[N], int len, int n)
 {
     int m, k, level;
@@ -71,7 +73,7 @@ void setHelixArray(int (*a)[N], int len, int n)
         }
     }
 }
-
+//递归螺旋方阵
 void set_Recursive_HelixArray(int a[][N], int len, int n, int m)
 {
     int k, level;
@@ -109,6 +111,7 @@ int main()
     int b[N][N];
     int c[N][N];
     int d[N][N];
+
     int m = 5;
     int n = 5;
     SetRowArray(a, m, n);
