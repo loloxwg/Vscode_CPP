@@ -80,7 +80,7 @@ int main(){
 
 		for (i = 1; i <= 5; i++)
 		{
-			m=DeQueue(q, i);
+			DeQueue(q, i);
 			printf("%d\n", flag);
 		}
 		
