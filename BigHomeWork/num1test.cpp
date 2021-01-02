@@ -19,6 +19,10 @@ int Insert(STUDENT student[],int num);
 //打印学生信息
 void PrintLine(STUDENT student[],int num);
 //查询学生信息
+void InsertionSort(STUDENT score[],int n);
+//插入排序
+int BinSearch(STUDENT student[],int student_id ,int num);
+//按学号进行二分查找
 int Search(STUDENT student[],int student_id);
 //删除学生信息
 int Delete(STUDENT student[],int student_id);
@@ -27,7 +31,7 @@ int main(){
     STUDENT student;
     int res,num,student_id;
     int command;
-    char home[]="1.Insert student\n2.Del student\n3.Search student\n4.Display all student\n5.exit\n";
+    char home[]="********************\n1.Insert student\n2.Del student\n3.Search student\n4.Display all student\n5.exit\n6.BinSearch\n";
 
     while(1){
         printf("%s",home);
@@ -35,7 +39,7 @@ int main(){
         fflush(stdin);
         switch(command){
             case 1:
-                printf("input the number of student\n");
+                printf("输入需要插入的学生数量：\n");
                 scanf("%d",&num);
                 fflush(stdin);
                 if(num>MAX_STUDENT_NUM){
@@ -77,6 +81,18 @@ int main(){
                 break;
             case 5:
                 return 0;
+            case 6:
+                printf("输入你要查找的学生的 id\n");
+                scanf("%d",&student_id);
+                fflush(stdin);
+                InsertionSort(a,num);
+                res=BinSearch(a,student_id,num);
+                if(res==-1){
+                    printf("the student is not exist\n");
+                }else{
+                    printf("该学生位于：%d\n",res);
+                }
+                break;
             default :
                 printf("input error!\n");
                 break;
@@ -101,7 +117,7 @@ int Insert(STUDENT student[],int num){
         }
         printf("input the student name:\n");
         scanf("%s",&student[i].name);
-        printf("input the student number\n");
+        printf("input the student phone\n");
         scanf("%d",&student[i].phone);
         fflush(stdin);
         if(res==0){
@@ -136,7 +152,45 @@ int Search(STUDENT student[],int student_id){
     }
     return -1;
 }
+void InsertionSort(STUDENT student[],int n)
+{
+    
+    for (int i = 0; i < n; i++)
+    {
+        int temp=student[i].id;
+        int j;
+        for ( j = i-1; j >= 0&&student[j].id>temp; j--)
+        {
+            student[j+1].id=student[j].id;
+        }
+        student[j+1].id=temp;
+        
+    }
+    return;
+    
+}
+int BinSearch(STUDENT student[],int student_id,int num )
+{
+    int low=0;
+    int high=num-1;
+    int mid;
 
+    while (low<=high)
+    {
+      
+        mid=low+(high-low)/2;
+        if (student_id>student[mid].id)
+        {
+            low=low+1;
+        }
+        else if (student_id<student[mid].id)
+        {
+            high=high-1;
+        }
+        else return mid;
+    }
+    return -1;
+}
 
 int Delete(STUDENT student[],int student_id){
     int j;
